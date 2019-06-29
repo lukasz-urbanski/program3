@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.Console", "Program3\Program3.Console.csproj", "{F140D7DE-4917-450D-9F49-4732D9F4E8E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.Console", "Program3.Console\Program3.Console.csproj", "{F140D7DE-4917-450D-9F49-4732D9F4E8E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.WFA", "Program3WFA\Program3.WFA.csproj", "{ED93E0B5-83EB-4A1C-AAF3-F2C1424C91D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.WFA", "Program3.WFA\Program3.WFA.csproj", "{ED93E0B5-83EB-4A1C-AAF3-F2C1424C91D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.Functions", "Functions\Program3.Functions.csproj", "{FF0DCD87-09EC-4752-80A1-BDC8E6FDCEC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Program3.Functions", "Program3.Functions\Program3.Functions.csproj", "{FF0DCD87-09EC-4752-80A1-BDC8E6FDCEC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
