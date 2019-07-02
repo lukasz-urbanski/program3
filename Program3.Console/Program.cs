@@ -1,55 +1,36 @@
-﻿using System;
+﻿using Program3.Functions;
+using System.Collections.Generic;
 using System.Threading;
-using Functions;
 
-namespace Program3
+namespace Program3.Console
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //Console.Write("Podaj liczbę: ");
-            //string num = (Console.ReadLine());
-            //Console.Write("Podaj liczbę sekund: ");
-            //int sleep = Int32.Parse(Console.ReadLine());
-            //Counter counter = new Counter(new WordToNumberConverter(num).getNumberAsInt(), "second");
+            List<Counter> counters = Initializator.GetListOfCounters();
+            int threadCounter = 0;
+            List<Thread> listOfThreads = new List<Thread>();
 
-            TimerCallback callback = new TimerCallback(Tick);
+            foreach (Counter c in counters)
+            {
+                threadCounter++;
+                listOfThreads.Add(new Thread(() => c.PrintCounter(c.MaxValue, c.Interval)) { Name = $"Licznik {threadCounter}" });
+            }
 
-            Console.WriteLine("Creating timer: {0}\n",
-                               DateTime.Now.ToString("h:mm:ss"));
+            System.Console.WriteLine();
 
-            // create a one second timer tick
-            Timer stateTimer = new Timer(callback, null, 0, 1000);
+            foreach (Thread t in listOfThreads)
+            {
+                t.Start();
+            }
+            foreach (Thread t in listOfThreads)
+            {
+                t.Join();
+            }
 
-            //// loop here forever
-            //for (; ; )
-            //{
-            //    // add a sleep for 100 mSec to reduce CPU usage
-            //    Thread.Sleep(100);
-
-            //}
-
-            TimerCallback callback2 = new TimerCallback(Tick2);
-
-
-            //// loop here forever
-            //for (; ; )
-            //{
-            //    // add a sleep for 100 mSec to reduce CPU usage
-            //    Thread.Sleep(100);
-
-            //}
-            Console.ReadKey();
-
-        }
-        static public void Tick(Object stateInfo)
-        {
-            Console.WriteLine("Tick1: {0}", DateTime.Now.ToString("h:mm:ss"));
-        }
-        static public void Tick2(Object stateInfo)
-        {
-            Console.WriteLine("Tick2: {0}", DateTime.Now.ToString("h:mm:ss"));
+            System.Console.Write($"{System.Environment.NewLine}Naciśnij dowolny klawisz, aby wyjść...");
+            System.Console.ReadKey();
         }
     }
 }

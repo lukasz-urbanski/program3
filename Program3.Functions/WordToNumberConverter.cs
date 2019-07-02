@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Functions
+namespace Program3.Functions
 {
     public class WordToNumberConverter
     {
         private int NumberAsInt { get; set; }
-
-        public int getNumberAsInt()
+        public int GetNumberAsInt()
         {
             return this.NumberAsInt;
         }
-
-        private Dictionary<string, int> translator = new Dictionary<string, int>();
-
+        private readonly Dictionary<string, int> translator = new Dictionary<string, int>();
         public WordToNumberConverter(string numberImputAsString)
         {
             string[] numberImputAsStringSplitted = numberImputAsString.Split(' ');

@@ -1,21 +1,31 @@
-﻿namespace Functions
+﻿using System;
+using System.Threading;
+
+namespace Program3.Functions
 {
     public class Counter
     {
+        public int MaxValue
+        {
+            get;
+        }
         public int Interval
         {
             get;
         }
-        
-        private string Unit
+        public Counter(int maxValue, int interval)
         {
-            get;
-            set;
-        }
-        public Counter(int interval, string unit)
-        {
+            this.MaxValue = maxValue;
             this.Interval = interval;
-            this.Unit = unit;
         }
+        public void PrintCounter(int maxvalue, int interval)
+        {
+            for (int i = 1; i <= maxvalue; i++)
+            {
+                var threadName = Thread.CurrentThread.Name;
+                Console.WriteLine($"{threadName}: {i}");
+                Thread.Sleep(interval);
+            }
+        }        
     }
 }

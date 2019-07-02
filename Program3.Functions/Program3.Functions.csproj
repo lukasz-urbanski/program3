@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Counter.cs" />
+    <Compile Include="Initializator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WordToNumberConverter.cs" />
   </ItemGroup>
