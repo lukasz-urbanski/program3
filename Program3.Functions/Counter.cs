@@ -18,7 +18,7 @@ namespace Program3.Functions
             this.MaxValue = maxValue;
             this.Interval = interval;
         }
-        public void PrintCounter(int maxvalue, int interval)
+        public void PrintCounterOnConsole(int maxvalue, int interval)
         {
             for (int i = 1; i <= maxvalue; i++)
             {

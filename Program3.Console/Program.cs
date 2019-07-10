@@ -15,7 +15,7 @@ namespace Program3.Console
             foreach (Counter c in counters)
             {
                 threadCounter++;
-                listOfThreads.Add(new Thread(() => c.PrintCounter(c.MaxValue, c.Interval)) { Name = $"Licznik {threadCounter}" });
+                listOfThreads.Add(new Thread(() => c.PrintCounterOnConsole(c.MaxValue, c.Interval)) { Name = $"Licznik {threadCounter}" });
             }
 
             System.Console.WriteLine();
