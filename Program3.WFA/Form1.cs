@@ -21,7 +21,7 @@ namespace Program3.WFA
         private void StartButton_Click(object sender, EventArgs e)
         {
             int intLicznik = Int32.Parse(LicznikiTextBox.Text);
-            AddNewControls(intLicznik);
+            //AddNewControls(intLicznik);
 
             List<Thread> listOfThreads = new List<Thread>();
 
@@ -37,6 +37,41 @@ namespace Program3.WFA
             }
         }
 
+        private void GenerateCountersButton_Click(object sender, EventArgs e)
+        {
+            if (Int32.TryParse(LicznikiTextBox.Text, out int controlsCounter))
+            {
+                for (int i = 1; i <= controlsCounter; i++)
+                {
+                    Label labelMaxValue = new Label();
+                    Controls.Add(labelMaxValue);
+                    labelMaxValue.Top = i * 30 + 60;
+                    labelMaxValue.Left = 10;
+                    labelMaxValue.Name = labelMaxValue.Text = "MaxValueLabel" + i + ":";
+
+                    TextBox textBoxMaxValue = new TextBox();
+                    Controls.Add(textBoxMaxValue);
+                    textBoxMaxValue.Top = i * 30 + 60;
+                    textBoxMaxValue.Left = 110;
+                    textBoxMaxValue.Width = 40;
+                    textBoxMaxValue.Name = "MaxValueTextBox" + i;
+
+                    Label labelInteval = new Label();
+                    Controls.Add(labelInteval);
+                    labelInteval.Top = i * 30 + 60;
+                    labelInteval.Left = 190;
+                    labelInteval.Name = labelInteval.Text = "IntervalLabel" + i + ":";
+
+                    TextBox textBoxInterval = new TextBox();
+                    Controls.Add(textBoxInterval);
+                    textBoxInterval.Top = i * 30 + 60;
+                    textBoxInterval.Left = 290;
+                    textBoxInterval.Width = 40;
+                    textBoxInterval.Name = "IntervalTextBox" + i;
+                }
+            }
+        }
+        /*
         private List<Control> AddNewControls(int controlsCounter)
         {
             List<Control> listOfControls = new List<Control>();
@@ -71,7 +106,7 @@ namespace Program3.WFA
             }
             return listOfControls;
         }
-
+        */
         public delegate void delSetValue(string value);
 
         public void MthSetValue(string value)
@@ -111,15 +146,6 @@ namespace Program3.WFA
             }
             OutputMaxValueTextBox.Text = doliczeniaMaxValue.ToString();
             OutputIntervalTextBox.Text = doliczeniaInterval.ToString();
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            foreach (Control tb in Controls)
-            {
-                listBox1.Items.Add(tb.GetType() + " - " + tb.Text);
-            }
         }
     }
 }

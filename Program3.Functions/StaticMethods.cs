@@ -2,18 +2,23 @@
 
 namespace Program3.Functions
 {
-    public class WordToNumberConverter
+    public static class StaticMethods
     {
-        private int NumberAsInt { get; set; }
-        public int GetNumberAsInt()
+        public static List<Counter> GetListOfCounters(int amountOfCounters, List<int> maxValue, List<int> interval)
         {
-            return this.NumberAsInt;
+            List<Counter> listOfCounters = new List<Counter>();
+            for (int i = 0; i < amountOfCounters; i++)
+            {
+                listOfCounters.Add(new Counter(maxValue[i], interval[i]));
+            }
+            return listOfCounters;
         }
-        private readonly Dictionary<string, int> translator = new Dictionary<string, int>();
-        public WordToNumberConverter(string numberImputAsString)
+        public static int WordToNumberConverter(string numberImputAsString)
         {
+            Dictionary<string, int> translator = new Dictionary<string, int>();
+            int resultOfThisMethod = 0;
             string[] numberImputAsStringSplitted = numberImputAsString.Split(' ');
-            int tempNumberAsInt = 0;
+
             translator.Add("one", 1);
             translator.Add("two", 2);
             translator.Add("three", 3);
@@ -42,11 +47,12 @@ namespace Program3.Functions
             translator.Add("eighty", 80);
             translator.Add("ninety", 90);
             translator.Add("hundred", 100);
+
             for (int i = numberImputAsStringSplitted.Length - 1; i >= 0; i--)
             {
-                tempNumberAsInt += translator[numberImputAsStringSplitted[i]];
+                resultOfThisMethod += translator[numberImputAsStringSplitted[i]];
             }
-            this.NumberAsInt = tempNumberAsInt;
+            return resultOfThisMethod;
         }
     }
 }
