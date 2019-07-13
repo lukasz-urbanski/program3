@@ -33,15 +33,12 @@ namespace Program3.WFA
             this.AmountOfCountersLabel = new System.Windows.Forms.Label();
             this.LicznikiTextBox = new System.Windows.Forms.TextBox();
             this.GenerateCountersButton = new System.Windows.Forms.Button();
-            this.WynikLabel = new System.Windows.Forms.Label();
-            this.LicznikLabel = new System.Windows.Forms.Label();
-            this.OutputMaxValueTextBox = new System.Windows.Forms.TextBox();
-            this.OutputIntervalTextBox = new System.Windows.Forms.TextBox();
-            this.AddButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ProgressLabel = new System.Windows.Forms.Label();
+            this.StartButton = new System.Windows.Forms.Button();
             this.TypeOfCounterGroupBox = new System.Windows.Forms.GroupBox();
             this.DigitRadioButton = new System.Windows.Forms.RadioButton();
             this.TextRadioButton = new System.Windows.Forms.RadioButton();
+            this.ThreadsListBox = new System.Windows.Forms.ListBox();
             this.TypeOfCounterGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,56 +68,24 @@ namespace Program3.WFA
             this.GenerateCountersButton.UseVisualStyleBackColor = true;
             this.GenerateCountersButton.Click += new System.EventHandler(this.GenerateCountersButton_Click);
             // 
-            // WynikLabel
+            // ProgressLabel
             // 
-            this.WynikLabel.AutoSize = true;
-            this.WynikLabel.Location = new System.Drawing.Point(753, 428);
-            this.WynikLabel.Name = "WynikLabel";
-            this.WynikLabel.Size = new System.Drawing.Size(35, 13);
-            this.WynikLabel.TabIndex = 5;
-            this.WynikLabel.Text = "label2";
+            this.ProgressLabel.AutoSize = true;
+            this.ProgressLabel.Location = new System.Drawing.Point(248, 13);
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(74, 13);
+            this.ProgressLabel.TabIndex = 5;
+            this.ProgressLabel.Text = "ProgressLabel";
             // 
-            // LicznikLabel
+            // StartButton
             // 
-            this.LicznikLabel.AutoSize = true;
-            this.LicznikLabel.Location = new System.Drawing.Point(459, 315);
-            this.LicznikLabel.Name = "LicznikLabel";
-            this.LicznikLabel.Size = new System.Drawing.Size(35, 13);
-            this.LicznikLabel.TabIndex = 4;
-            this.LicznikLabel.Text = "label2";
-            // 
-            // OutputMaxValueTextBox
-            // 
-            this.OutputMaxValueTextBox.Location = new System.Drawing.Point(500, 314);
-            this.OutputMaxValueTextBox.Name = "OutputMaxValueTextBox";
-            this.OutputMaxValueTextBox.Size = new System.Drawing.Size(100, 20);
-            this.OutputMaxValueTextBox.TabIndex = 2;
-            // 
-            // OutputIntervalTextBox
-            // 
-            this.OutputIntervalTextBox.Location = new System.Drawing.Point(606, 314);
-            this.OutputIntervalTextBox.Name = "OutputIntervalTextBox";
-            this.OutputIntervalTextBox.Size = new System.Drawing.Size(100, 20);
-            this.OutputIntervalTextBox.TabIndex = 3;
-            // 
-            // AddButton
-            // 
-            this.AddButton.Location = new System.Drawing.Point(713, 310);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(75, 23);
-            this.AddButton.TabIndex = 7;
-            this.AddButton.Text = "button1";
-            this.AddButton.UseVisualStyleBackColor = true;
-            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(713, 340);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.StartButton.Location = new System.Drawing.Point(16, 85);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(119, 23);
+            this.StartButton.TabIndex = 7;
+            this.StartButton.Text = "Start!";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // TypeOfCounterGroupBox
             // 
@@ -156,19 +121,24 @@ namespace Program3.WFA
             this.TextRadioButton.Text = "tekstowy";
             this.TextRadioButton.UseVisualStyleBackColor = true;
             // 
+            // ThreadsListBox
+            // 
+            this.ThreadsListBox.FormattingEnabled = true;
+            this.ThreadsListBox.Location = new System.Drawing.Point(374, 10);
+            this.ThreadsListBox.Name = "ThreadsListBox";
+            this.ThreadsListBox.Size = new System.Drawing.Size(100, 342);
+            this.ThreadsListBox.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ThreadsListBox);
             this.Controls.Add(this.TypeOfCounterGroupBox);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.AddButton);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.GenerateCountersButton);
-            this.Controls.Add(this.WynikLabel);
-            this.Controls.Add(this.LicznikLabel);
-            this.Controls.Add(this.OutputIntervalTextBox);
-            this.Controls.Add(this.OutputMaxValueTextBox);
+            this.Controls.Add(this.ProgressLabel);
             this.Controls.Add(this.LicznikiTextBox);
             this.Controls.Add(this.AmountOfCountersLabel);
             this.Name = "Form1";
@@ -185,15 +155,12 @@ namespace Program3.WFA
         private System.Windows.Forms.Label AmountOfCountersLabel;
         private System.Windows.Forms.TextBox LicznikiTextBox;
         private System.Windows.Forms.Button GenerateCountersButton;
-        private System.Windows.Forms.Label WynikLabel;
-        private System.Windows.Forms.Label LicznikLabel;
-        private System.Windows.Forms.TextBox OutputMaxValueTextBox;
-        private System.Windows.Forms.TextBox OutputIntervalTextBox;
-        private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label ProgressLabel;
+        private System.Windows.Forms.Button StartButton;
         private System.Windows.Forms.GroupBox TypeOfCounterGroupBox;
         private System.Windows.Forms.RadioButton DigitRadioButton;
         private System.Windows.Forms.RadioButton TextRadioButton;
+        private System.Windows.Forms.ListBox ThreadsListBox;
     }
 }
 

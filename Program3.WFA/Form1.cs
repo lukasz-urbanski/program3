@@ -1,6 +1,7 @@
 ﻿using Program3.Functions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,101 +15,127 @@ namespace Program3.WFA
         }
 
         int threadCounter;
-        List<Counter> counters = new List<Counter>();
-        int doliczeniaMaxValue;
-        int doliczeniaInterval;
+
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            int intLicznik = Int32.Parse(LicznikiTextBox.Text);
-            //AddNewControls(intLicznik);
-
+            ThreadsListBox.Items.Clear();
             List<Thread> listOfThreads = new List<Thread>();
-
-            foreach (Counter c in counters)
+            List<int> listOfMaxValues = new List<int>();
+            List<int> listOfIntervals = new List<int>();
+            List<Counter> counters = new List<Counter>();
+            RadioButton selectedButton = TypeOfCounterGroupBox.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            List<string> textBoxesTexts = new List<string>();
+            foreach (Control textBox in Controls)
             {
-                threadCounter++;
-                listOfThreads.Add(new Thread(() => PrintCounterOnLabel(c.MaxValue, c.Interval)) { Name = $"Licznik {threadCounter}" });
+                if (textBox is TextBox)
+                {
+                    textBoxesTexts.Add(textBox.Text);
+                }
             }
 
-            foreach (Thread t in listOfThreads)
+            bool flag = StaticMethodsForWfa.ValidateInput(textBoxesTexts, selectedButton.Text);
+
+            if (flag)
             {
-                t.Start();
+                foreach (Control textBox in Controls)
+                {
+                    if (textBox.Name.StartsWith("MaxValueTextBox"))
+                    {
+                        int intToProcess;
+                        if (selectedButton.Text.Equals("tekstowy"))
+                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text);
+                        else
+                            intToProcess = Int32.Parse(textBox.Text);
+                        listOfMaxValues.Add(intToProcess);
+                    }
+                    if (textBox.Name.StartsWith("IntervalTextBox"))
+                    {
+                        int intToProcess;
+                        if (selectedButton.Text.Equals("tekstowy"))
+                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text);
+                        else
+                            intToProcess = Int32.Parse(textBox.Text);
+                        listOfIntervals.Add(intToProcess * 1000);
+                    }
+                }
+
+                int amountOfCounters;
+                if (selectedButton.Text.Equals("tekstowy"))
+                    amountOfCounters = StaticMethods.WordToNumberConverter(LicznikiTextBox.Text);
+                else
+                    amountOfCounters = Int32.Parse(LicznikiTextBox.Text);
+
+                counters = StaticMethods.GetListOfCounters(amountOfCounters, listOfMaxValues, listOfIntervals);
+
+                foreach (Counter c in counters)
+                {
+                    threadCounter++;
+                    listOfThreads.Add(new Thread(() => PrintCounterOnListBox(c.MaxValue, c.Interval)) { Name = $"Licznik {threadCounter}" });
+                }
+
+                foreach (Thread t in listOfThreads)
+                {
+                    t.Start();
+                }
+                // TO DO:
+                // Obsługa ProgressLabel
             }
         }
 
         private void GenerateCountersButton_Click(object sender, EventArgs e)
         {
-            if (Int32.TryParse(LicznikiTextBox.Text, out int controlsCounter))
+            int controlsCounter = -1;
+            RadioButton selectedButton = TypeOfCounterGroupBox.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            if (selectedButton.Text.Equals("liczbowy"))
+            {
+                Int32.TryParse(LicznikiTextBox.Text, out controlsCounter);
+            }
+            if (selectedButton.Text.Equals("tekstowy"))
+            {
+                try
+                {
+                    controlsCounter = StaticMethods.WordToNumberConverter(LicznikiTextBox.Text);
+                }
+                catch
+                {
+                }
+            }
+            if (controlsCounter > 0)
             {
                 for (int i = 1; i <= controlsCounter; i++)
                 {
                     Label labelMaxValue = new Label();
                     Controls.Add(labelMaxValue);
-                    labelMaxValue.Top = i * 30 + 60;
+                    labelMaxValue.Top = i * 30 + 100;
                     labelMaxValue.Left = 10;
                     labelMaxValue.Name = labelMaxValue.Text = "MaxValueLabel" + i + ":";
 
                     TextBox textBoxMaxValue = new TextBox();
                     Controls.Add(textBoxMaxValue);
-                    textBoxMaxValue.Top = i * 30 + 60;
+                    textBoxMaxValue.Top = i * 30 + 100;
                     textBoxMaxValue.Left = 110;
                     textBoxMaxValue.Width = 40;
                     textBoxMaxValue.Name = "MaxValueTextBox" + i;
 
                     Label labelInteval = new Label();
                     Controls.Add(labelInteval);
-                    labelInteval.Top = i * 30 + 60;
+                    labelInteval.Top = i * 30 + 100;
                     labelInteval.Left = 190;
                     labelInteval.Name = labelInteval.Text = "IntervalLabel" + i + ":";
 
                     TextBox textBoxInterval = new TextBox();
                     Controls.Add(textBoxInterval);
-                    textBoxInterval.Top = i * 30 + 60;
+                    textBoxInterval.Top = i * 30 + 100;
                     textBoxInterval.Left = 290;
                     textBoxInterval.Width = 40;
                     textBoxInterval.Name = "IntervalTextBox" + i;
                 }
             }
         }
-        /*
-        private List<Control> AddNewControls(int controlsCounter)
-        {
-            List<Control> listOfControls = new List<Control>();
 
-            for (int i = 1; i <= controlsCounter; i++)
-            {
-                Label labelMaxValue = new Label();
-                Controls.Add(labelMaxValue);
-                labelMaxValue.Top = i * 40;
-                labelMaxValue.Left = 10;
-                labelMaxValue.Name = labelMaxValue.Text = "MaxValueLabel" + i;
 
-                TextBox textBoxMaxValue = new TextBox();
-                Controls.Add(textBoxMaxValue);
-                textBoxMaxValue.Top = i * 40;
-                textBoxMaxValue.Left = 110;
-                textBoxMaxValue.Name = "MaxValueTextBox" + i;
-                //textBoxMaxValue.Text = textBoxMaxValue.Name;
-
-                Label labelInteval = new Label();
-                Controls.Add(labelInteval);
-                labelInteval.Top = i * 40;
-                labelInteval.Left = 230;
-                labelInteval.Name = labelInteval.Text = "IntervalLabel" + i;
-
-                TextBox textBoxInterval = new TextBox();
-                Controls.Add(textBoxInterval);
-                textBoxInterval.Top = i * 40;
-                textBoxInterval.Left = 330;
-                textBoxInterval.Name = "IntervalTextBox" + i;
-                //textBoxInterval.Text = textBoxInterval.Name;
-            }
-            return listOfControls;
-        }
-        */
         public delegate void delSetValue(string value);
-
         public void MthSetValue(string value)
         {
             if (this.InvokeRequired)
@@ -117,11 +144,10 @@ namespace Program3.WFA
             }
             else
             {
-                WynikLabel.Text = value;
+                ThreadsListBox.Items.Add(value);
             }
         }
-
-        public void PrintCounterOnLabel(int maxvalue, int interval)
+        public void PrintCounterOnListBox(int maxvalue, int interval)
         {
             for (int i = 1; i <= maxvalue; i++)
             {
@@ -129,23 +155,6 @@ namespace Program3.WFA
                 MthSetValue($"{threadName}: {i}");
                 Thread.Sleep(interval);
             }
-        }
-
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            foreach (Control tb in Controls)
-            {
-                if ((tb is TextBox) && tb.Name.StartsWith("MaxValueTextBox"))
-                {
-                    doliczeniaMaxValue += Int32.Parse(tb.Text);
-                }
-                if ((tb is TextBox) && tb.Name.StartsWith("IntervalTextBox"))
-                {
-                    doliczeniaInterval += Int32.Parse(tb.Text);
-                }
-            }
-            OutputMaxValueTextBox.Text = doliczeniaMaxValue.ToString();
-            OutputIntervalTextBox.Text = doliczeniaInterval.ToString();
         }
     }
 }

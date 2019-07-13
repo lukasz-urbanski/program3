@@ -50,7 +50,15 @@ namespace Program3.Functions
 
             for (int i = numberImputAsStringSplitted.Length - 1; i >= 0; i--)
             {
-                resultOfThisMethod += translator[numberImputAsStringSplitted[i]];
+                try
+                {
+                    resultOfThisMethod += translator[numberImputAsStringSplitted[i]];
+                }
+                catch (System.Exception)
+                {
+                    return -1;
+                }
+                
             }
             return resultOfThisMethod;
         }
