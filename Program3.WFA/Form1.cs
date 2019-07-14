@@ -101,6 +101,16 @@ namespace Program3.WFA
                 {
                 }
             }
+            if (selectedButton.Text.Equals("rzymski"))
+            {
+                try
+                {
+                    controlsCounter = StaticMethods.RomanToNumberConverter(LicznikiTextBox.Text);
+                }
+                catch
+                {
+                }
+            }
             if (controlsCounter > 0)
             {
                 for (int i = 1; i <= controlsCounter; i++)
