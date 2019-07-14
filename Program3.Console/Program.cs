@@ -19,9 +19,9 @@ namespace Program3.Console
 
             do
             {
-                System.Console.Write("Podaj typ licznika - [t]ekstowy / [l]iczbowy: ");
+                System.Console.Write("Podaj typ licznika - [t]ekstowy / [l]iczbowy / [r]zymski: ");
                 typeOfCounter = Char.Parse(System.Console.ReadLine().Substring(0, 1));
-            } while (!(typeOfCounter.Equals('t') || (typeOfCounter.Equals('l'))));
+            } while (!(typeOfCounter.Equals('t') || (typeOfCounter.Equals('l') || (typeOfCounter.Equals('r')))));
 
             amountOfCounters = GetValueAsInt("amountOfCounters", typeOfCounter);
 
@@ -84,6 +84,18 @@ namespace Program3.Console
                         break;
                     case ('l'):
                         success = Int32.TryParse(input, out output);
+                        break;
+                    case ('r'):
+                        try
+                        {
+                            output = StaticMethods.RomanToNumberConverter(input);
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            System.Console.WriteLine(e.Message);
+                            output = -1;
+                        }
                         break;
                 }
             } while (!(success == true && output > 0));
