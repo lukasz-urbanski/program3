@@ -29,7 +29,7 @@ namespace Program3.Console
             {
                 System.Console.WriteLine($"Licznik {i + 1}:");
                 maxValue.Add(GetValueAsInt("maxValue", typeOfCounter));
-                if (typeOfCounter.Equals('t'))
+                if (typeOfCounter.Equals('t')) //always add braces {}. you will regret missing them at some point
                     interval.Add(GetValueAsInt("interval", typeOfCounter) * 1000);
                 else
                     interval.Add(GetValueAsInt("interval", typeOfCounter));
@@ -40,6 +40,7 @@ namespace Program3.Console
             foreach (Counter c in counters)
             {
                 threadCounter++;
+                //in 'modern C#' it is rarely needed to use 'Thread' directly. There is a 'Task Async Programming' pattern (a.k.a async/await) that is simpler and more high level
                 listOfThreads.Add(new Thread(() =>
                 StaticMethodsForConsole.PrintCounterOnConsole(c.MaxValue, c.Interval))
                 { Name = $"Licznik {threadCounter}" });

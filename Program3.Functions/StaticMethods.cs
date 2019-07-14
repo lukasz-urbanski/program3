@@ -2,7 +2,9 @@
 
 namespace Program3.Functions
 {
-    public static class StaticMethods
+    public static class StaticMethods //not really a proper name for a class, and also not really an example of 'encapsulation'. 
+    //works fine, and is quite tidy, but imagine that your program is larger and you have 299 methods here.
+    //Then it would become sort of a master class that works on every aspect of the program..
     {
         public static List<Counter> GetListOfCounters(int amountOfCounters, List<int> maxValue, List<int> interval)
         {
@@ -17,7 +19,7 @@ namespace Program3.Functions
         {
             Dictionary<string, int> translator = new Dictionary<string, int>();
             int resultOfThisMethod = 0;
-            string[] numberImputAsStringSplitted = numberImputAsString.Split(' ');
+            string[] numberImputAsStringSplitted = numberImputAsString.Split(' '); //does it support 'twenty-seven'? (correct spelling)
 
             translator.Add("one", 1);
             translator.Add("two", 2);

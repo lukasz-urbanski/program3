@@ -34,17 +34,17 @@ namespace Program3.WFA
                 }
             }
 
-            bool flag = StaticMethodsForWfa.ValidateInput(textBoxesTexts, selectedButton.Text);
+            bool flag = StaticMethodsForWfa.ValidateInput(textBoxesTexts, selectedButton.Text); 
 
-            if (flag)
+            if (flag) //what is 'flag'? perhaps it should be called 'isInputValid' ?
             {
                 foreach (Control textBox in Controls)
                 {
-                    if (textBox.Name.StartsWith("MaxValueTextBox"))
+                    if (textBox.Name.StartsWith("MaxValueTextBox")) //there is a better way of identifying a control than compare a name to magic string
                     {
                         int intToProcess;
                         if (selectedButton.Text.Equals("tekstowy"))
-                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text);
+                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text);//braces, braces everywhere
                         else
                             intToProcess = Int32.Parse(textBox.Text);
                         listOfMaxValues.Add(intToProcess);
@@ -135,7 +135,7 @@ namespace Program3.WFA
         }
 
 
-        public delegate void delSetValue(string value);
+        public delegate void delSetValue(string value); //don't need a custom delegate really (you can use esiting 'Action' delegate)
         public void MthSetValue(string value)
         {
             if (this.InvokeRequired)
@@ -147,13 +147,13 @@ namespace Program3.WFA
                 ThreadsListBox.Items.Add(value);
             }
         }
-        public void PrintCounterOnListBox(int maxvalue, int interval)
+        public void PrintCounterOnListBox(int maxvalue, int interval) 
         {
             for (int i = 1; i <= maxvalue; i++)
             {
                 var threadName = Thread.CurrentThread.Name;
                 MthSetValue($"{threadName}: {i}");
-                Thread.Sleep(interval);
+                Thread.Sleep(interval); //in fact this is the 'Counter' logic - but in your case, this is a logic of UI
             }
         }
     }
