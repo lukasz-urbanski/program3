@@ -39,6 +39,7 @@ namespace Program3.WFA
             this.DigitRadioButton = new System.Windows.Forms.RadioButton();
             this.TextRadioButton = new System.Windows.Forms.RadioButton();
             this.ThreadsListBox = new System.Windows.Forms.ListBox();
+            this.RomanRadioButton = new System.Windows.Forms.RadioButton();
             this.TypeOfCounterGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,11 +90,12 @@ namespace Program3.WFA
             // 
             // TypeOfCounterGroupBox
             // 
+            this.TypeOfCounterGroupBox.Controls.Add(this.RomanRadioButton);
             this.TypeOfCounterGroupBox.Controls.Add(this.DigitRadioButton);
             this.TypeOfCounterGroupBox.Controls.Add(this.TextRadioButton);
             this.TypeOfCounterGroupBox.Location = new System.Drawing.Point(152, 10);
             this.TypeOfCounterGroupBox.Name = "TypeOfCounterGroupBox";
-            this.TypeOfCounterGroupBox.Size = new System.Drawing.Size(90, 70);
+            this.TypeOfCounterGroupBox.Size = new System.Drawing.Size(90, 98);
             this.TypeOfCounterGroupBox.TabIndex = 9;
             this.TypeOfCounterGroupBox.TabStop = false;
             this.TypeOfCounterGroupBox.Text = "Rodaj licznika";
@@ -129,6 +131,17 @@ namespace Program3.WFA
             this.ThreadsListBox.Size = new System.Drawing.Size(100, 342);
             this.ThreadsListBox.TabIndex = 10;
             // 
+            // RomanRadioButton
+            // 
+            this.RomanRadioButton.AutoSize = true;
+            this.RomanRadioButton.Location = new System.Drawing.Point(7, 68);
+            this.RomanRadioButton.Name = "RomanRadioButton";
+            this.RomanRadioButton.Size = new System.Drawing.Size(59, 17);
+            this.RomanRadioButton.TabIndex = 2;
+            this.RomanRadioButton.TabStop = true;
+            this.RomanRadioButton.Text = "rzymski";
+            this.RomanRadioButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +174,7 @@ namespace Program3.WFA
         private System.Windows.Forms.RadioButton DigitRadioButton;
         private System.Windows.Forms.RadioButton TextRadioButton;
         private System.Windows.Forms.ListBox ThreadsListBox;
+        private System.Windows.Forms.RadioButton RomanRadioButton;
     }
 }
 

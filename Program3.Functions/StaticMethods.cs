@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Program3.Functions
 {
@@ -58,9 +59,73 @@ namespace Program3.Functions
                 {
                     return -1;
                 }
-                
+
             }
+
             return resultOfThisMethod;
         }
+
+        public static int ConvertSingleRomanChar(char inputChar)
+        {
+            switch (inputChar)
+            {
+                case 'I':
+                    return 1;
+                case 'V':
+                    return 5;
+                case 'X':
+                    return 10;
+                case 'L':
+                    return 50;
+                case 'C':
+                    return 100;
+                default:
+                    throw new ArgumentException($"\tBłąd: \"{inputChar.ToString()}\" nie jest prawidłową cyfrą rzymską. Cezar jest rozczarowany.");
+            }
+        }
+
+        public static int RomanToNumberConverter(string numberImputAsString)
+        {
+            numberImputAsString = numberImputAsString.ToUpper();
+            int result = 0;
+
+            for (int currentChar = 0; currentChar < numberImputAsString.Length; currentChar++)
+            {
+                if (currentChar < numberImputAsString.Length - 1) //if this is not the last char yet
+                {
+                    //check if next char forms a combo
+
+                    string combo = numberImputAsString[currentChar].ToString() + numberImputAsString[currentChar + 1].ToString();
+                    switch (combo)
+                    {
+                        case "IX":
+                            result += 9;
+                            currentChar++;
+                            break;
+                        case "IV":
+                            result += 4;
+                            currentChar++;
+                            break;
+                        case "XL":
+                            result += 40;
+                            currentChar++;
+                            break;
+                        case "XC":
+                            result += 90;
+                            currentChar++;
+                            break;
+                        default: //no. it's not a combo
+                            result += ConvertSingleRomanChar(numberImputAsString[currentChar]);
+                            break;
+                    }
+                }
+                else //it is the last char
+                {
+                    result += ConvertSingleRomanChar(numberImputAsString[currentChar]);
+                }
+            }
+            return result;
+        }
+
     }
 }

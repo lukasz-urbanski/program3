@@ -16,6 +16,22 @@ namespace Program3.Functions
                 }
                 return true;
             }
+
+            if (selectedButton.Equals("rzymski"))
+            {
+                foreach (string textBox in textBoxesToBeChecked)
+                {
+                    try
+                    {
+                        if (StaticMethods.RomanToNumberConverter(textBox) == -1)
+                            return false;
+                    }
+                    catch
+                    {}
+                }
+                return true;
+            }
+
             if (selectedButton.Equals("liczbowy"))
             {
                 int temp;

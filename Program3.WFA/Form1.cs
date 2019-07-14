@@ -53,7 +53,9 @@ namespace Program3.WFA
                     {
                         int intToProcess;
                         if (selectedButton.Text.Equals("tekstowy"))
-                            intToProcess = (StaticMethods.WordToNumberConverter(textBox.Text)) * 1000;
+
+                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text) * 1000;
+                         
                         else
                             intToProcess = Int32.Parse(textBox.Text);
                         listOfIntervals.Add(intToProcess);
@@ -63,6 +65,8 @@ namespace Program3.WFA
                 int amountOfCounters;
                 if (selectedButton.Text.Equals("tekstowy"))
                     amountOfCounters = StaticMethods.WordToNumberConverter(LicznikiTextBox.Text);
+                if (selectedButton.Text.Equals("rzymski"))
+                    amountOfCounters = StaticMethods.RomanToNumberConverter(LicznikiTextBox.Text);
                 else
                     amountOfCounters = Int32.Parse(LicznikiTextBox.Text);
 
@@ -96,6 +100,16 @@ namespace Program3.WFA
                 try
                 {
                     controlsCounter = StaticMethods.WordToNumberConverter(LicznikiTextBox.Text);
+                }
+                catch
+                {
+                }
+            }
+            if (selectedButton.Text.Equals("rzymski"))
+            {
+                try
+                {
+                    controlsCounter = StaticMethods.RomanToNumberConverter(LicznikiTextBox.Text);
                 }
                 catch
                 {
