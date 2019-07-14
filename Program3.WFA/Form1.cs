@@ -53,16 +53,18 @@ namespace Program3.WFA
                     {
                         int intToProcess;
                         if (selectedButton.Text.Equals("tekstowy"))
-                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text);
+                            intToProcess = StaticMethods.WordToNumberConverter(textBox.Text) * 1000;
                         else
                             intToProcess = Int32.Parse(textBox.Text);
-                        listOfIntervals.Add(intToProcess * 1000);
+                        listOfIntervals.Add(intToProcess);
                     }
                 }
 
                 int amountOfCounters;
                 if (selectedButton.Text.Equals("tekstowy"))
                     amountOfCounters = StaticMethods.WordToNumberConverter(LicznikiTextBox.Text);
+                if (selectedButton.Text.Equals("rzymski"))
+                    amountOfCounters = StaticMethods.RomanToNumberConverter(LicznikiTextBox.Text);
                 else
                     amountOfCounters = Int32.Parse(LicznikiTextBox.Text);
 

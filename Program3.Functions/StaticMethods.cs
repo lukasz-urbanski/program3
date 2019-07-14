@@ -102,6 +102,10 @@ namespace Program3.Functions
                             result += 9;
                             currentChar++;
                             break;
+                        case "IV":
+                            result += 4;
+                            currentChar++;
+                            break;
                         case "XL":
                             result += 40;
                             currentChar++;
